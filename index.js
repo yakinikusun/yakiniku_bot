@@ -1,44 +1,8 @@
-const http = require('http');
-
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const dotenv = require('dotenv');
 
 dotenv.config();
 
-const PORT = process.env.PORT || 8000;
-// Koyebデプロイ後に発行される公開URLを環境変数で設定しておく
-const SELF_URL = process.env.SELF_URL; // 例: https://your-app.koyeb.app
-
-// --- ヘルスチェック用HTTPサーバー ---
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end("OK");
-});
-
-server.listen(PORT, () => {
-  console.log(`Health check server listening on port ${PORT}`);
-});
-
-// --- 自分自身に定期pingを送る ---
-function startSelfPing() {
-  if (!SELF_URL) {
-    console.warn("SELF_URL not set. Skipping self-ping.");
-    return;
-  }
-
-  setInterval(async () => {
-    try {
-      const res = await fetch(SELF_URL);
-      console.log(`Self-ping OK: ${res.status}`);
-    } catch (err) {
-      console.error("Self-ping failed:", err.message);
-    }
-  }, 10 * 60 * 1000); // 10分ごと
-}
-
-startSelfPing();
-
-// クライアントの作成
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -47,7 +11,6 @@ const client = new Client({
     ]
 });
 
-// コマンドの読み込み
 client.commands = new Collection();
 
 client.on(Events.InteractionCreate, async (interaction) => {
@@ -77,8 +40,6 @@ client.once(Events.ClientReady, (readyClient) => {
     console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 
-
-// メッセージ反応
 client.on('messageCreate', async (message) => {
 	if (message.author.bot) return
 	if (['うお','うおっ','うおw','うおW','おお','おぉ'].includes(message.content) || message.content.includes('うぉ')) {
