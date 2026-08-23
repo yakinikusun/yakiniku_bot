@@ -42,7 +42,7 @@ client.once(Events.ClientReady, (readyClient) => {
 
 client.on('messageCreate', async (message) => {
 	if (message.author.bot) return
-	if (message.content === 'うお' || message.content === 'うぉ' || message.content === 'うぉっ' || message.content === 'うおっ' || message.content === 'うおw' || message.content === 'うおW' || message.content === 'うおW' || message.content === 'おお' || message.content === 'おぉ') {
+	if (message.content === 'うお' || message.content === 'うぉ' || message.content === 'うぉっ' || message.content === 'うおっ' || message.content === 'うおw' || message.content === 'うおW' || message.content === 'うぉw' || message.content === 'うぉW' || message.content === 'おお' || message.content === 'おぉ') {
 		await message.reply({
 			content: ("鳥成分を検知"),
 			allowedMentions: { repliedUser: false },
