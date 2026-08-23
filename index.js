@@ -50,6 +50,14 @@ client.on('messageCreate', async (message) => {
 		});
 		return
 	}
+    else if (['うぉ'].includes(message.content)) {
+		await message.reply({
+			content: ("鳥成分を検知"),
+			allowedMentions: { repliedUser: false },
+			flags: 'SuppressNotifications'
+		});
+		return
+	}
 });
 
 client.login(process.env.TOKEN);
