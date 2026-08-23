@@ -42,9 +42,9 @@ client.once(Events.ClientReady, (readyClient) => {
 
 client.on('messageCreate', async (message) => {
 	if (message.author.bot) return
-	if (['ping'].includes(message.content)) {
+	if (['うお','うおっ','うおw','うおW','おお','おぉ'].includes(message.content) || message.content.includes('うぉ')) {
 		await message.reply({
-			content: ("pong"),
+			content: ("鳥成分を検知"),
 			allowedMentions: { repliedUser: false },
 			flags: 'SuppressNotifications'
 		});
