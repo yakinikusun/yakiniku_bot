@@ -55,7 +55,6 @@ client.on('messageCreate', async (message) => {
 		return
 	}else{
         random = Math.floor( Math.random() * 100 ) + 1 ;
-        console.log(random)
         if (random <= 1) {
             await message.channel.send({
                 content: "うおw",
