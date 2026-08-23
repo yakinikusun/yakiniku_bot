@@ -2,7 +2,9 @@ const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const dotenv = require('dotenv');
 
 dotenv.config();
+var random;
 
+// Discordクライアントの作成
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -11,6 +13,7 @@ const client = new Client({
     ]
 });
 
+// コマンドの読み込み
 client.commands = new Collection();
 
 client.on(Events.InteractionCreate, async (interaction) => {
@@ -40,6 +43,7 @@ client.once(Events.ClientReady, (readyClient) => {
     console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 
+// メッセージ受信時の処理
 client.on('messageCreate', async (message) => {
 	if (message.author.bot) return
 	if (['うお','うおっ','うおw','うおW','おお','おぉ'].includes(message.content) || message.content.includes('うぉ')) {
@@ -49,7 +53,15 @@ client.on('messageCreate', async (message) => {
 			flags: 'SuppressNotifications'
 		});
 		return
-	}
+	}else{
+        random = Math.floor( Math.random() * 100 ) + 1 ;
+        if (random <= 1) {
+            await message.channel.send({
+                content: "うおw",
+                flags: 'SuppressNotifications'
+            });
+        }
+    }
 });
 
 client.login(process.env.TOKEN);
