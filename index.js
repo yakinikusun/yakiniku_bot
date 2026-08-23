@@ -42,15 +42,7 @@ client.once(Events.ClientReady, (readyClient) => {
 
 client.on('messageCreate', async (message) => {
 	if (message.author.bot) return
-	if (message.content === 'うお' || message.content === 'うぉ' || message.content === 'うぉっ' || message.content === 'うおっ' || message.content === 'うおw' || message.content === 'うおW' || message.content === 'うぉw' || message.content === 'うぉW' || message.content === 'おお' || message.content === 'おぉ') {
-		await message.reply({
-			content: ("鳥成分を検知"),
-			allowedMentions: { repliedUser: false },
-			flags: 'SuppressNotifications'
-		});
-		return
-	}
-    else if (['うぉ'].includes(message.content)) {
+	if (['うお','うおっ','うおw','うおW','おお','おぉ'].includes(message.content) || message.content.includes('うぉ')) {
 		await message.reply({
 			content: ("鳥成分を検知"),
 			allowedMentions: { repliedUser: false },
