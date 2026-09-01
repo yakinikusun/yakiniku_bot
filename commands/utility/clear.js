@@ -1,8 +1,7 @@
 const { SlashCommandBuilder, PermissionsBitField } = require("discord.js");
-const Database = require("better-sqlite3");
+const { DatabaseSync } = require('node:sqlite');
 
-const db = new Database("./db/setting.db", { verbose: console.log });
-db.pragma("journal_mode = WAL");
+const db = new DatabaseSync("./db/setting.db");
 
 module.exports = {
 	data: new SlashCommandBuilder().setName("clear").setDescription("DBを初期化します"),

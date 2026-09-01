@@ -1,13 +1,15 @@
 const { SlashCommandBuilder } = require("discord.js");
-const Database = require("better-sqlite3");
 const { translateSystemName } = require("../helper/translate_system_name");
+const { DatabaseSync } = require('node:sqlite');
 
-const db = new Database("./db/setting.db", { verbose: console.log });
-db.pragma("journal_mode = WAL");
+const db = new DatabaseSync("./db/setting.db");
 
 const getUser = db.prepare(`SELECT * FROM DiceSystem WHERE user_id = ?`);
 const insertDiceSystem = db.prepare(`INSERT INTO DiceSystem (user_id, system) VALUES (?, ?);`);
 const updateDiceSystem = db.prepare(`UPDATE DiceSystem SET system = ? WHERE user_id = ?;`);
+getUser.setReadBigInts(true);
+insertDiceSystem.setReadBigInts(true);
+updateDiceSystem.setReadBigInts(true);
 
 module.exports = {
 	data: new SlashCommandBuilder()

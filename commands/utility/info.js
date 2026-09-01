@@ -1,10 +1,11 @@
 const { DynamicLoader } = require("bcdice");
 const { SlashCommandBuilder, MessageFlags, ContainerBuilder } = require("discord.js");
-const Database = require("better-sqlite3");
 const { translateSystemName } = require("../helper/translate_system_name");
+const { DatabaseSync } = require('node:sqlite');
 
-const db = new Database("./db/setting.db");
+const db = new DatabaseSync("./db/setting.db");
 const getUser = db.prepare(`SELECT * FROM DiceSystem WHERE user_id = ?`);
+getUser.setReadBigInts(true);
 
 module.exports = {
 	data: new SlashCommandBuilder().setName("info").setDescription("ダイスの詳細を表示します"),
