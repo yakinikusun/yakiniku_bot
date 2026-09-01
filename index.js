@@ -1,7 +1,7 @@
 const { Client, Collection, Events, GatewayIntentBits, ActivityType } = require('discord.js');
+const { DatabaseSync } = require('node:sqlite');
 const fs = require('node:fs');
 const path = require('node:path');
-const Database = require('better-sqlite3');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -24,12 +24,11 @@ client.commands = new Collection();
 if (!fs.existsSync('./db')) {
     fs.mkdirSync('./db');
 }
-const db = new Database('./db/setting.db');
+const db = new DatabaseSync('./db/setting.db');
 db.prepare(`CREATE TABLE IF NOT EXISTS DiceSystem (
     user_id INTEGER PRIMARY KEY,
     system TEXT NOT NULL
     );`).run();
-const getUser = db.prepare(`SELECT * FROM DiceSystem WHERE user_id = ?`);
 
 const commandsPath = path.join(__dirname, 'commands/utility');
 const commandFiles = fs.readdirSync(commandsPath).filter((file) => file.endsWith('.js'));

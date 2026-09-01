@@ -1,9 +1,10 @@
+const { DatabaseSync } = require('node:sqlite');
 const { DynamicLoader } = require("bcdice");
-const Database = require("better-sqlite3");
 const { translateSystemName } = require("./translate_system_name");
 
-const db = new Database("./db/setting.db");
+const db = new DatabaseSync("./db/setting.db");
 const getUser = db.prepare(`SELECT * FROM DiceSystem WHERE user_id = ?`);
+getUser.setReadBigInts(true);
 
 async function diceroll(system, roll) {
 	const loader = new DynamicLoader();
