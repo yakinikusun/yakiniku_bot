@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 var random;
+const EXCLUSION_CHANNEL = process.env.EXCLUSION_CH || null;
 
 // Discordクライアントの作成
 const client = new Client({
@@ -45,7 +46,9 @@ client.once(Events.ClientReady, (readyClient) => {
 
 // メッセージ受信時の処理
 client.on('messageCreate', async (message) => {
+    if (EXCLUSION_CHANNEL && message.channel.id === EXCLUSION_CHANNEL) return
     if (message.author.bot) return
+    
     if (['うお', 'うおっ', 'うおw', 'うおW', 'おお', 'おぉ'].includes(message.content) || message.content.includes('うぉ')) {
         await message.reply({
             content: ("鳥成分を検知"),
