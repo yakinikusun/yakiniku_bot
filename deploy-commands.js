@@ -1,11 +1,22 @@
 const { REST, Routes } = require('discord.js');
 const fs = require('node:fs');
 const path = require('node:path');
+const Database = require('better-sqlite3');
 
 const dotenv = require('dotenv');
 
 dotenv.config();
 
+if (!fs.existsSync('./db')) {
+    fs.mkdirSync('./db');
+}
+
+const db = new Database('./db/setting.db');
+db.prepare(`CREATE TABLE IF NOT EXISTS DiceSystem (
+    user_id INTEGER PRIMARY KEY,
+    system TEXT NOT NULL
+    );`).run();
+const getUser = db.prepare(`SELECT * FROM DiceSystem WHERE user_id = ?`);
 
 const commands = [];
 // Grab all the command folders from the commands directory you created earlier
