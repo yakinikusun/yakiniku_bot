@@ -8,16 +8,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node deploy-commands.js",
-    "start": "node deploy-commands.js && node index.js"
+    "start": "node index.js"
   },
   "dependencies": {
-    "bcdice": "^4.9.0",
-    "better-sqlite3": "^12.11.1",
-    "discord.js": "^14.26.4",
+    "discord.js": "^14.27.0",
     "dotenv": "^17.4.2"
-  },
-  "overrides": {
-    "undici": "^6.26.0"
   }
 }
