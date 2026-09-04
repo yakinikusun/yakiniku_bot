@@ -8,7 +8,7 @@ module.exports = {
 	async execute(interaction) {
 		dicehelpEmbed
 			.setDescription("BCDiceを利用したDiscord用のダイスボットです")
-			.addFields(
+			.setFields(
 				{ name: "/dice", value: "ダイスを振ることができます", inline: true },
 				{ name: "/d", value: "\*\*/dice\*\*の短縮版です", inline: true },
 				{ name: "", value: "", inline: false },
